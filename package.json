@@ -9,6 +9,7 @@
   "author": "Surjendu Mukhopadhyay",
   "license": "ISC",
   "dependencies": {
-    "yargs": "^17.7.1"
+    "yargs": "^17.7.1",
+    "fs":"*"
   }
 }
