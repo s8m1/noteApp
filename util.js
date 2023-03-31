@@ -2,9 +2,14 @@ const fs = require('fs')
 
 // Load Notes from DB
 const loadNotes = function () {
-    const notesBuff = fs.readFileSync('notesDB.json')
-    const notesJSON = notesBuff.toString()
-    return JSON.parse(notesJSON)
+    try {
+        const notesBuff = fs.readFileSync('notesDB.json')
+        const notesJSON = notesBuff.toString()
+        return JSON.parse(notesJSON)
+    } catch (error) {
+        return []
+    }
+
 }
 
 // Saves notes to DB
@@ -17,14 +22,40 @@ const saveNotes = function (notes) {
 // Add notes to DB
 const addNotes = function (title, body) {
     const notes = loadNotes()
-    notes.push({
-        title: title,
-        body: body
+    // Check for duplicate titles already existing
+    const dupNotes = notes.filter(function (notes) {
+        return notes.title === title
     })
-    saveNotes(notes)
+    console.log(dupNotes.length)
+    if (dupNotes.length == 0) {
+        notes.push({
+            title: title,
+            body: body
+        })
+        saveNotes(notes)
+        console.log("Note '" + title + "' has been saved !")
+    } else {
+        console.log("Title '" + title + "' already exists !")
+    }
+
 }
 
+// Remove a note
+
+const remNotes = function (title) {
+    const Notes = loadNotes()
+    const remNotes = Notes.filter(function (notes) {
+        return notes.title !== title
+    })
+    if (remNotes.length === 0) {
+        console.log("No notes found for the title '" + title + "'")
+    } else {
+        saveNotes(remNotes)
+        console.log(remNotes.length + " Notes have been deleted with title '" + title + "'")        
+    }
+}
 
 module.exports = {
-    addNotes: addNotes
+    addNotes: addNotes,
+    remNotes: remNotes
 }

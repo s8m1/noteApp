@@ -1,8 +1,10 @@
 const yargs = require('yargs')
 const fs = require('fs')
 const util = require('./util.js')
+const { remNotes } = require('./util.js')
+const { title } = require('process')
 
-// Add Notes
+// Add a new note from CLI
 yargs.command({
     command: 'add',
     describe: 'Adding a new note',
@@ -10,12 +12,12 @@ yargs.command({
         title: {
             describe: "Tile of the note",
             demandOption: true,
-            type:"string"
+            type: "string"
         },
-        body:{
-            describe: "Body of the note",
+        body: {
+            describe: "Body of the note", 
             demandOption: true,
-            type: "string"    
+            type: "string"
         }
     },
     handler: function (argv) {
@@ -27,8 +29,15 @@ yargs.command({
 yargs.command({
     command: 'remove',
     describe: 'Removing a note',
-    handler: function () {
-        console.log('Removing a note')
+    builder: {
+        title: {
+            describe: "Title of the note",
+            demandOption: true,
+            type: "string"
+        }
+    },
+    handler: function (argv) {
+        util.remNotes(argv.title)
     }
 })
 
