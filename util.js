@@ -44,14 +44,17 @@ const addNotes = function (title, body) {
 
 const remNotes = function (title) {
     const Notes = loadNotes()
-    const remNotes = Notes.filter(function (notes) {
-        return notes.title !== title
+    const findNotes = Notes.filter(function (Notes) {
+        return Notes.title = title
     })
-    if (remNotes.length === 0) {
+    if (findNotes.length === 0) {
         console.log("No notes found for the title '" + title + "'")
     } else {
+        const remNotes = Notes.filter(function (Notes) {
+            return Notes.title !== title
+        })
         saveNotes(remNotes)
-        console.log(remNotes.length + " Notes have been deleted with title '" + title + "'")        
+        console.log(remNotes.length + " Notes have been deleted with title '" + title + "'")
     }
 }
 
