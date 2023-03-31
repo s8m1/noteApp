@@ -45,7 +45,7 @@ const addNotes = function (title, body) {
 const remNotes = function (title) {
     const Notes = loadNotes()
     const findNotes = Notes.filter(function (Notes) {
-        return Notes.title = title
+        return Notes.title === title
     })
     if (findNotes.length === 0) {
         console.log("No notes found for the title '" + title + "'")
