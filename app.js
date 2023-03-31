@@ -1,8 +1,6 @@
 const yargs = require('yargs')
 const fs = require('fs')
 const util = require('./util.js')
-const { remNotes } = require('./util.js')
-const { title } = require('process')
 
 // Add a new note from CLI
 yargs.command({

@@ -26,7 +26,6 @@ const addNotes = function (title, body) {
     const dupNotes = notes.filter(function (notes) {
         return notes.title === title
     })
-    console.log(dupNotes.length)
     if (dupNotes.length == 0) {
         notes.push({
             title: title,
@@ -41,7 +40,6 @@ const addNotes = function (title, body) {
 }
 
 // Remove a note
-
 const remNotes = function (title) {
     const Notes = loadNotes()
     const findNotes = Notes.filter(function (Notes) {
