@@ -1,4 +1,5 @@
 const fs = require('fs')
+const { title } = require('process')
 
 // Load Notes from DB
 const loadNotes = function () {
@@ -49,24 +50,31 @@ const remNotes = (title) => {
 }
 
 // //List notes
-// // const listNotes = () => {
-// //     const listNote = loadNotes()
-// //         listNote.forEach(note =>
-// //         console.log(note.title)
-// //     )
-// // }
-
 const listNotes = () => {
     const listNote = loadNotes()
+    console.log('Here are all the notes :')
     listNote.forEach(note => {
         console.log(note.title)
     });
 }
 
-// Remove a note
+// Read a note with title
+const readNote = (title) => {
+    console.log("Reading note with title .." + title)
+    const readNote = loadNotes()
+    const filterNote = readNote.filter((note) => {
+        return note.title === title
+    }
+    )
+    filterNote.forEach((note) => {
+        console.log(note.title + " --- " + note.body)
+    })
+}
+
 
 module.exports = {
     addNotes: addNotes,
     remNotes: remNotes,
-    listNotes: listNotes
+    listNotes: listNotes,
+    readNote: readNote
 }
