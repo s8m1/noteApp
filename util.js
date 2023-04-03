@@ -9,9 +9,7 @@ const loadNotes = function () {
     } catch (error) {
         return []
     }
-
 }
-
 // Saves notes to DB
 const saveNotes = function (notes) {
     const notesString = JSON.stringify(notes)
@@ -20,12 +18,9 @@ const saveNotes = function (notes) {
 
 
 // Add notes to DB
-const addNotes = function (title, body) {
+const addNotes = (title, body) => {
     const notes = loadNotes()
-    // Check for duplicate titles already existing
-    const dupNotes = notes.filter(function (notes) {
-        return notes.title === title
-    })
+    const dupNotes = notes.filter((note) => note.title === title)
     if (dupNotes.length == 0) {
         notes.push({
             title: title,
@@ -36,15 +31,12 @@ const addNotes = function (title, body) {
     } else {
         console.log("Title '" + title + "' already exists !")
     }
-
 }
 
 // Remove a note
-const remNotes = function (title) {
+const remNotes = (title) => {
     const Notes = loadNotes()
-    const findNotes = Notes.filter(function (Notes) {
-        return Notes.title === title
-    })
+    const findNotes = Notes.filter((Notes) => Notes.title === title)
     if (findNotes.length === 0) {
         console.log("No notes found for the title '" + title + "'")
     } else {
@@ -56,7 +48,25 @@ const remNotes = function (title) {
     }
 }
 
+// //List notes
+// // const listNotes = () => {
+// //     const listNote = loadNotes()
+// //         listNote.forEach(note =>
+// //         console.log(note.title)
+// //     )
+// // }
+
+const listNotes = () => {
+    const listNote = loadNotes()
+    listNote.forEach(note => {
+        console.log(note.title)
+    });
+}
+
+// Remove a note
+
 module.exports = {
     addNotes: addNotes,
-    remNotes: remNotes
+    remNotes: remNotes,
+    listNotes: listNotes
 }
